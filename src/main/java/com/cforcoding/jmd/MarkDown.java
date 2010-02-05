@@ -108,6 +108,9 @@ public class MarkDown {
     private static final Pattern LINE_BREAK;
     private static final String LINE_BREAK_ELEMENT = "<br" + EMPTY_ELEMENT_SUFFIX;
 
+	private static final String ESCAPE_PREFIX = "MDESCAPENEXT";
+	private static final String ESCAPE_SUFFIX = "IWANTMYMDTOBREAK";
+
     private Map<String, String> urls;
     private Map<String, String> titles;
     private Map<String, String> htmlBlocks;
@@ -120,7 +123,7 @@ public class MarkDown {
         for (int i = 0; i < ESCAPE_CHARACTERS.length(); i++) {
             char c = ESCAPE_CHARACTERS.charAt(i);
             String ch = Character.toString(c);
-            String code = Integer.toString(ch.hashCode());
+            String code = ESCAPE_PREFIX+Integer.toString(ch.hashCode())+ESCAPE_SUFFIX;
             escape.put(ch, code);
             backslashEscape.put("\\" + ch, code);
         }

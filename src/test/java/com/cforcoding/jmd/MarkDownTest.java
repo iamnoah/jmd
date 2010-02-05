@@ -65,12 +65,17 @@ public class MarkDownTest {
     public void testMarkDown(String name, boolean strict, String text, String html) {
         runTest(name, strict, text, html);
     }
+    
+    @Test
+    public void testNumberBug() {
+    	runTest("number bug",true,"35","<p>35</p>");
+    }
 
     private void runTest(String name, boolean strict, String text, String html) {
         MarkDown MarkDown = new MarkDown();
         String output = MarkDown.transform(text);
         boolean test = same(html, output, strict);
-        assert test : name + " output not as expected";
+        assert test : name + " output not as expected - "+output;
     }
 
     private boolean same(String s1, String s2, boolean strict) {
